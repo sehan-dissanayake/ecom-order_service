@@ -3,8 +3,9 @@ from beanie import init_beanie
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from app.models.order import Order 
+import os
 
-MONGO_DETAILS = "mongodb://root:password@localhost:27019"
+MONGO_DETAILS = os.getenv("MONGODB_URL", "mongodb://root:password@localhost:27017")
 
 client = AsyncIOMotorClient(MONGO_DETAILS)
 database = client.order_db

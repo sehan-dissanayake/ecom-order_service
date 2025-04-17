@@ -1,7 +1,11 @@
 import httpx
 from fastapi import HTTPException
+import os
 
-PRODUCT_SERVICE_URL = "http://localhost:8000/products/"
+PRODUCT_SERVICE_URL = os.getenv(
+    "PRODUCT_SERVICE_URL", 
+    "http://localhost:8000/products/"
+)
 
 async def get_product(product_id: str):
     async with httpx.AsyncClient() as client:

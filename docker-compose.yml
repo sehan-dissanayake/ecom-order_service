@@ -1,14 +1,29 @@
 services:
+  order_service:
+    build: .
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URL=mongodb://root:password@mongodb:27017
+      - PRODUCT_SERVICE_URL=http://product_service:8000
+    networks:
+      - microservices_net
+
   mongodb:
     image: mongo:latest
-    container_name: order_db
-    ports:
-      - "27019:27017" 
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - microservices_net
 
 volumes:
   mongodb_data:
+
+networks:
+  microservices_net:
+    external: true
