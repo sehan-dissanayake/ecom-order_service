@@ -7,7 +7,7 @@ services:
       - mongodb
     environment:
       - MONGODB_URL=mongodb://root:password@mongodb:27017
-      - PRODUCT_SERVICE_URL=http://product_service:8000
+      - PRODUCT_SERVICE_URL=http://product_service:8000/
     networks:
       - microservices_net
 
